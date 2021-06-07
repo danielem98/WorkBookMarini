@@ -1,4 +1,5 @@
 package ires.corso.partone;
+import java.util.Scanner;
 
 public class ImputTest {
     public static void main(String[] args) {

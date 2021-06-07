@@ -17,7 +17,6 @@ public class StringTest {
             for(int i =0; i< args.length; i++){
                 l[i]=args[i].length();
 
-
                 for(int x=0; x<l[i]; x++){
                     ci[i]=args[i].charAt(0);
                     cf[i]=args[i].charAt(l[i]-1);
