@@ -1,5 +1,5 @@
 package ires.corso.partone.geometric;
-import ires.corso.partone.geometric.Trapezio;
+
 
 public class Trapezio {
 
