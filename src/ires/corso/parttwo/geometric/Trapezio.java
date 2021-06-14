@@ -1,6 +1,8 @@
-package ires.corso.parttwo.classes;
+package ires.corso.parttwo.geometric;
 
-public class Trapezio extends MasterShape{
+import ires.corso.parttwo.geometric.MasterShape;
+
+public class Trapezio extends MasterShape {
     private double bMag,bMin,h,l1,l2;
 
     public Trapezio(double bMag,double bMin,double h,double l1, double l2){

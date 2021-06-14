@@ -1,10 +1,10 @@
 package ires.corso.parttwo;
 import java.util.Scanner;
 
-import ires.corso.parttwo.classes.MasterShape;
-import ires.corso.parttwo.classes.Triangolo;
-import ires.corso.parttwo.classes.Quadrato;
-import ires.corso.parttwo.classes.Trapezio;
+import ires.corso.parttwo.geometric.MasterShape;
+import ires.corso.parttwo.geometric.Triangolo;
+import ires.corso.parttwo.geometric.Quadrato;
+import ires.corso.parttwo.geometric.Trapezio;
 
 public class Test {
     public static void main(String[] args){

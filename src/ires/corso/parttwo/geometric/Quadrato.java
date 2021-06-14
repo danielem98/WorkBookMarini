@@ -1,6 +1,8 @@
-package ires.corso.parttwo.classes;
+package ires.corso.parttwo.geometric;
 
-public class Quadrato extends MasterShape{
+import ires.corso.parttwo.geometric.MasterShape;
+
+public class Quadrato extends MasterShape {
     private double l;
 
     public Quadrato(double l){

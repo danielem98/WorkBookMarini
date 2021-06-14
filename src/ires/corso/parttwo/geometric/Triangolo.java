@@ -1,6 +1,6 @@
-package ires.corso.parttwo.classes;
+package ires.corso.parttwo.geometric;
 
-public class Triangolo extends MasterShape{
+public class Triangolo extends MasterShape {
     private double b,h,l1,l2;
 
     public Triangolo(double b, double h,double l1, double l2){

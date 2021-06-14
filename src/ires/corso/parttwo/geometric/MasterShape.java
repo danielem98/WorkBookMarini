@@ -1,4 +1,4 @@
-package ires.corso.parttwo.classes;
+package ires.corso.parttwo.geometric;
 
 public class MasterShape {
     protected int id;
