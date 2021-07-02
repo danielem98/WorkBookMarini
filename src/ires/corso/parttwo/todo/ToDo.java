@@ -45,15 +45,12 @@ public class ToDo implements Serializable, Cloneable
 
     public ToDo cloneForUpdate() {
         // fabbrica una copia esatta del To-Do (compreso l'ID)
-        ToDo clone = new ToDo();
-
-        clone.id = id;
-        clone.titolo = titolo;
-        clone.dataInserimento = dataInserimento;
-        clone.dataConsegna = dataConsegna;
-        clone.descrizione = descrizione;
-        clone.priorita = priorita;
-        clone.stato = stato;
+        ToDo clone = null;
+        try{
+            clone = (ToDo) clone();
+        }catch(CloneNotSupportedException cnse){
+            System.out.println("Errore ");
+        }
 
         return clone;
     }

@@ -35,7 +35,7 @@ public class ToDoManager
         System.out.print("stato: ");
         t.setStato(ToDo.Stato.valueOf(in.nextLine()));
 
-
+        add(t);
     }
 
     public void updateToDo() {
@@ -47,7 +47,7 @@ public class ToDoManager
         System.out.print("Inserisci l'ID dell'oggetto da modificare: ");
         long id = in.nextLong();
 
-        ToDo toDoAppoggio = (toDoMap.get(id)).cloneForUpdate();
+        ToDo toDoAppoggio = (_repository.toDoMap.get(id)).cloneForUpdate();
 
 
         boolean exit = false;

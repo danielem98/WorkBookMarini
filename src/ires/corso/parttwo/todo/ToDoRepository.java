@@ -1,6 +1,10 @@
 package ires.corso.parttwo.todo;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,39 +26,71 @@ public class ToDoRepository implements Serializable
 
 
     protected static ToDoRepository _repository = null;
-
-    protected static Map<Long, ToDo> toDoMap = new HashMap<>();
+    protected Map<Long, ToDo> toDoMap = new HashMap<>();
+    private static String _fileName;
+    private static boolean _init = false;
 
     private static long idSeed;
 
+    //costruttore privato
+    private ToDoRepository(){
+    }
 
+    public static boolean init(String fileName){
+        try{
+            Path p = Paths.get(fileName);
+            _fileName = p.toString();
+            _init = true;
+        }
+        catch (InvalidPathException ipe){
+
+        }
+
+        return _init;
+    }
+
+    //Generatore di ID
     public static long getNewId(){
         return ++idSeed;
     }
 
-    // Restituisce sempre la stessa istanza (quella serializzata/deserializzata da file)
-    public static ToDoRepository getToDoRepository() {
+    public static ToDoRepository getToDoRepository() throws Exception {
+        // Restituisce sempre la stessa istanza (quella serializzata/deserializzata da file)
+        if(!_init){
+            throw new Exception("To Do repository has not been inizialized");
+        }
+
+        if(_repository==null)
+            if(!Files.exists(Paths.get(_fileName)))
+                _repository= new ToDoRepository();
+            else
+                loadFromFile();
         return _repository;
     }
 
+    //Eliminazione di un to-do
     public void delete(Long ID) {
         toDoMap.remove(ID);
     }
 
+    //aggiunta di un to-do
     public static void add(ToDo t) {
         // si deve entrare nell'oggetto t e leggere il suo ID
         // per poi salvarlo nella mappa correttamente (con put(ID, t))
 
-        toDoMap.put(t.getId(),t);
+        t.id = getNewId();
+
+        _repository.toDoMap.put(t.getId(),t);
     }
 
+    //aggiornamento di un to-do
     public static void update(ToDo t) {
         // si prende l'ID dall'oggetto t
         // si recupera dalla mappa il TO-DO corrispondente con get(t), per controllo
         // si sostituisce con put(ID, t)
 
-        if(toDoMap.containsKey(t.getId()))
-            toDoMap.put(t.getId(),t);
+        if(_repository.toDoMap.containsKey(t.getId()))
+            _repository.toDoMap.put(t.getId(),t);
         else
             System.out.println("id non presente");
     }
@@ -68,11 +104,11 @@ public class ToDoRepository implements Serializable
         return toDoList;
     }
 
-    // Salva tutta l'istanza del repository (compresi gli oggetti
-    // TO-DO presenti in mappa) in un file tramite il metodo
-    // writeObject di ObjectOutputStream.
-    // Anche il membro idSeed è salvato su file (è variabile di istanza).
     public static void writeToFile(String fileName) {
+        // Salva tutta l'istanza del repository (compresi gli oggetti
+        // TO-DO presenti in mappa) in un file tramite il metodo
+        // writeObject di ObjectOutputStream.
+        // Anche il membro idSeed è salvato su file (è variabile di istanza).
         // serializzazione su file con writeObject: cfr. hints/InputOutput
         try
         {
@@ -81,12 +117,8 @@ public class ToDoRepository implements Serializable
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             // Method for serialization of object
-
-            out.writeObject(toDoMap);
+            out.writeObject(_repository);
             out.writeObject(idSeed);
-
-            out.close();
-            file.close();
 
             System.out.println("Object has been serialized");
         }
@@ -95,20 +127,17 @@ public class ToDoRepository implements Serializable
         }
     }
 
-    public static ToDoRepository loadFromFile(String fileName) {
+    public static void loadFromFile() throws IOException,ClassNotFoundException{
         // Individua il file e lo deserializza con readObject
         // _repository = ...
         try
         {
             // Reading the object from a file
-            FileInputStream file = new FileInputStream(fileName);
+            FileInputStream file = new FileInputStream(_fileName);
             ObjectInputStream in = new ObjectInputStream(file);
 
             // Method for deserialization of object
             _repository = (ToDoRepository) in.readObject();
-
-            in.close();
-            file.close();
 
             System.out.println("Object has been deserialized ");
 
@@ -119,7 +148,5 @@ public class ToDoRepository implements Serializable
         catch(ClassNotFoundException ex) {
             System.out.println("ClassNotFoundException is caught");
         }
-
-        return _repository;
     }
 }
