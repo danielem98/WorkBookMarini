@@ -23,7 +23,7 @@ public class ToDoManager
         System.out.print("Titolo: ");
         t.setTitolo(in.nextLine());
 
-        System.out.print("Data consegna: ");
+        System.out.print("Data consegna(Es. 2022-08-07): ");
         t.setDataConsegna(LocalDate.parse(in.nextLine()));
 
         System.out.print("Descrizione: ");
@@ -38,7 +38,7 @@ public class ToDoManager
         add(t);
     }
 
-    public void updateToDo() {
+    public static void updateToDo() {
         // Chiede quale Id si vuole modificare
         // Si chiede un "clone" del TO-DO
         // Loop di richiesta dati da modificare
@@ -97,5 +97,13 @@ public class ToDoManager
 
         update(toDoAppoggio);
 
+    }
+
+    public static void deleteToDo(){
+        Scanner in = new Scanner(System.in);
+        System.out.print("Inserisci l'ID dell'oggetto da eliminare: ");
+        long id = in.nextLong();
+
+        delete(_repository.toDoMap.get(id).getId());
     }
 }

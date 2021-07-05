@@ -2,10 +2,13 @@ package ires.corso.parttwo.todo;
 
 import javafx.util.converter.LocalDateStringConverter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 
+import static ires.corso.parttwo.todo.ToDoImportExport.*;
+import static ires.corso.parttwo.todo.ToDoList.*;
 import static ires.corso.parttwo.todo.ToDoManager.*;
 import static ires.corso.parttwo.todo.ToDoRepository.*;
 
@@ -21,7 +24,15 @@ public class ToDoApplication
     // 4. quando l'utente sceglie dal meno di uscire, chiede conferma e serializza in uscita
     // 5. Fornisce anche i metodi della classe "lettore" di quiz... askForInput , display
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+
+        try{
+            importToFile();
+        }
+        catch (Exception e) {
+            System.out.println("Errore caricamento repository");
+        }
 
         Scanner in = new Scanner(System.in);
 
@@ -48,13 +59,13 @@ public class ToDoApplication
                     sottomenu = in.nextInt();
                     switch(sottomenu) {
                         case 1:
-
+                            viewByPriority();
                             break;
                         case 2:
-
+                            viewByDate();
                             break;
                         case 3:
-
+                            viewByState();
                             break;
                     }
                     break;
@@ -68,13 +79,13 @@ public class ToDoApplication
                     sottomenu = in.nextInt();
                     switch(sottomenu) {
                         case 1:
-
+                            createNewToDo();
                         break;
                     case 2:
-
+                            deleteToDo();
                         break;
                     case 3:
-
+                        updateToDo();
                         break;
                     }
                     break;
@@ -88,10 +99,10 @@ public class ToDoApplication
                     sottomenu = in.nextInt();
                     switch(sottomenu) {
                         case 1:
-
+                                exportToFile();
                             break;
                         case 2:
-
+                            importToFile();
                             break;
                         case 3:
 
@@ -101,6 +112,8 @@ public class ToDoApplication
                 case 4:
                     System.out.println("Arrivederci");
                     esci = true;
+
+                    _repository.writeToFile("Repository.txt");
                     break;
 
             }

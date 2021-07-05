@@ -2,7 +2,6 @@ package ires.corso.parttwo.todo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 import static ires.corso.parttwo.todo.ToDoRepository.*;
 
@@ -42,6 +41,7 @@ public class ToDo implements Serializable, Cloneable
         this.priorita = priorita;
         this.stato = stato;
     }
+
 
     public ToDo cloneForUpdate() {
         // fabbrica una copia esatta del To-Do (compreso l'ID)
@@ -102,5 +102,12 @@ public class ToDo implements Serializable, Cloneable
 
     public void setPriorita(Priorita priorita) {
         this.priorita = priorita;
+    }
+
+    public String prettyPrint(){
+        String s = String.format(" ID: %d \n TITOLO: %s \n DESCRIZIONE: %s \n CREATO IL: %s \n CON SCADENZA IL: %s \n CON PRIORITà: %s \n CON STATO: %s",
+                getId(), getTitolo(), getDescrizione(), getDataInserimento().toString(), getDataConsegna().toString(), getPriorita().toString(),
+                getStato().toString());
+        return s;
     }
 }

@@ -69,8 +69,8 @@ public class ToDoRepository implements Serializable
     }
 
     //Eliminazione di un to-do
-    public void delete(Long ID) {
-        toDoMap.remove(ID);
+    public static void delete(Long ID) {
+        _repository.toDoMap.remove(ID);
     }
 
     //aggiunta di un to-do
@@ -95,10 +95,10 @@ public class ToDoRepository implements Serializable
             System.out.println("id non presente");
     }
 
-    public List<ToDo> getToDoList() {
+    public static List<ToDo> getToDoList() {
         // restituisce lista di tutti i TO-DO esistenti
         ArrayList<ToDo> toDoList = new ArrayList<>();
-        for(ToDo t : toDoMap.values()){
+        for(ToDo t : _repository.toDoMap.values()){
             toDoList.add(t);
         }
         return toDoList;
