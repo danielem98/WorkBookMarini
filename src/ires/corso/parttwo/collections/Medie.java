@@ -43,7 +43,7 @@ public class Medie {
         //creo la mappa dei voti
         HashMap<Student, Double> votes = new HashMap<>();
 
-        /*
+
         for(Course c: courseList) {
             System.out.println("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
             //iterazione assignment
@@ -60,26 +60,6 @@ public class Medie {
             }
         }
 
-         */
-
-
-         /*
-        //iterazione corsi
-        for(Course c: courseList) {
-            System.out.println("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-            //iterazione assignment
-            for (Assignment as : c.getAssignment().keySet()) {
-                System.out.println("----------------------------------------------------------------------");
-                //Assegno a ogni studente un voto e lo inserisco nell mappa votes
-                for (Student s : studentsList) {
-                    votes.put(s, random.nextDouble()*10);
-                    c.getAssignment().put(as, votes);
-                    System.out.println(as.getTitolo());
-
-                    System.out.println("Corso " +c.getTitolo()+" Lo studente " + s.getNome() + " Ha preso " + votes.get(s) + " nell' assignment " + as.getTitolo() );
-                }
-            }
-        }
 
         Double media = 0.0;
         for(Course c: courseList) {
@@ -99,7 +79,7 @@ public class Medie {
             }
         }
 
-          */
+
 
 
     }
