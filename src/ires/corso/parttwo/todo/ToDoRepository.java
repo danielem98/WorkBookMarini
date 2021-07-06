@@ -32,8 +32,10 @@ public class ToDoRepository implements Serializable
 
     private static long idSeed;
 
+
+
     //costruttore privato
-    private ToDoRepository(){
+    public ToDoRepository(){
     }
 
     public static boolean init(String fileName){
@@ -56,6 +58,7 @@ public class ToDoRepository implements Serializable
 
     public static ToDoRepository getToDoRepository() throws Exception {
         // Restituisce sempre la stessa istanza (quella serializzata/deserializzata da file)
+
         if(!_init){
             throw new Exception("To Do repository has not been inizialized");
         }
@@ -69,28 +72,26 @@ public class ToDoRepository implements Serializable
     }
 
     //Eliminazione di un to-do
-    public static void delete(Long ID) {
-        _repository.toDoMap.remove(ID);
+    public void delete(Long ID) {
+        toDoMap.remove(ID);
     }
 
     //aggiunta di un to-do
-    public static void add(ToDo t) {
+    public void add(ToDo t) {
         // si deve entrare nell'oggetto t e leggere il suo ID
         // per poi salvarlo nella mappa correttamente (con put(ID, t))
 
-        t.id = getNewId();
-
-        _repository.toDoMap.put(t.getId(),t);
+        toDoMap.put(t.getId(),t);
     }
 
     //aggiornamento di un to-do
-    public static void update(ToDo t) {
+    public void update(ToDo t) {
         // si prende l'ID dall'oggetto t
         // si recupera dalla mappa il TO-DO corrispondente con get(t), per controllo
         // si sostituisce con put(ID, t)
 
-        if(_repository.toDoMap.containsKey(t.getId()))
-            _repository.toDoMap.put(t.getId(),t);
+        if(toDoMap.containsKey(t.getId()))
+            toDoMap.put(t.getId(),t);
         else
             System.out.println("id non presente");
     }
@@ -127,7 +128,7 @@ public class ToDoRepository implements Serializable
         }
     }
 
-    public static void loadFromFile() throws IOException,ClassNotFoundException{
+    public static void loadFromFile() {
         // Individua il file e lo deserializza con readObject
         // _repository = ...
         try

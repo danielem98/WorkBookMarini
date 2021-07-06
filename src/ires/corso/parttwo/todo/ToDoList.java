@@ -19,8 +19,8 @@ public class ToDoList
     public static void viewByPriority() {
         // Questa funzione è chiamata qunado l'utente sceglie di visualizzare i dati per priorità...
         //ToDoRepository tdr = ToDoRepository.getToDoRepository();
-        ArrayList<ToDo> ToDoList = new ArrayList<>();
-        ToDoList = (ArrayList<ToDo>) getToDoList();
+        ArrayList<ToDo> ToDoListP = new ArrayList<>();
+        ToDoListP = (ArrayList<ToDo>) getToDoList();
 
         Comparator<ToDo> compareByPriority = new Comparator<ToDo>() {
             @Override
@@ -29,8 +29,8 @@ public class ToDoList
             }
         };
 
-        Collections.sort(ToDoList, compareByPriority);
-        ToDoList.forEach(t -> System.out.println(t.prettyPrint()));
+        Collections.sort(ToDoListP, compareByPriority);
+        ToDoListP.forEach(t -> System.out.println(t.prettyPrint()));
     }
 
     public static void viewByDate(){
@@ -38,7 +38,7 @@ public class ToDoList
         ToDoList = (ArrayList<ToDo>) getToDoList();
 
         Collections.sort(ToDoList,
-                ((Comparator<ToDo>)(ToDo t1, ToDo t2) -> t1.getDataConsegna().compareTo(t2.getDataConsegna())).reversed());
+                ((Comparator<ToDo>)(ToDo t1, ToDo t2) -> t1.getDataConsegna().compareTo(t2.getDataConsegna())));
         ToDoList.forEach(t -> System.out.println(t.prettyPrint()));
 
     }

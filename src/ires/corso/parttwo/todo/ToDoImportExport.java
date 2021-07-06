@@ -13,9 +13,8 @@ public class ToDoImportExport
     // Gestisce import/export da file
     // Mantiene i formati di import e di export (conversione da/verso stringa)
     private static String convertToString(ToDo t) {
-        String conversione = String.format("%s;%s;%s;%s;%s;%s;%s", t.getId() , t.getTitolo(), t, t.getDescrizione(),
-                t.getDataInserimento().toString(), t.getDataConsegna().toString(), t.getPriorita().toString(),
-                t.getStato().toString());
+        String conversione = String.format("%s$%s$%s$%s$%s$%s$%s", t.getId() , t.getTitolo(),t.getDataConsegna().toString(),t.getDataInserimento().toString(), t.getDescrizione(),
+                 t.getPriorita().toString(), t.getStato().toString());
 
         return conversione;
     }
@@ -65,7 +64,7 @@ public class ToDoImportExport
         Iterator<String> itr = fileLines.iterator();
         int numToDo = 0;
         while(itr.hasNext()){
-            String[] splitString = itr.next().split(";");
+            String[] splitString = itr.next().split("\\$");
 
 
             String titolo = null;

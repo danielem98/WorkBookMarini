@@ -26,13 +26,11 @@ public class ToDoApplication
 
     public static void main(String[] args) throws Exception {
 
+        ToDoRepository repository = null;
+        init("Repository.txt");
+        repository = getToDoRepository();
 
-        try{
-            importToFile();
-        }
-        catch (Exception e) {
-            System.out.println("Errore caricamento repository");
-        }
+        _repository=new ToDoRepository();
 
         Scanner in = new Scanner(System.in);
 

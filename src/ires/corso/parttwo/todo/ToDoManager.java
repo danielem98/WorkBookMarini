@@ -29,13 +29,14 @@ public class ToDoManager
         System.out.print("Descrizione: ");
         t.setDescrizione(in.nextLine());
 
-        System.out.print("priorita: ");
+        System.out.print("Priorita: ");
         t.setPriorita(ToDo.Priorita.valueOf(in.nextLine()));
 
-        System.out.print("stato: ");
+        System.out.print("Stato: ");
         t.setStato(ToDo.Stato.valueOf(in.nextLine()));
 
-        add(t);
+        _repository.add(t);
+
     }
 
     public static void updateToDo() {
@@ -53,49 +54,49 @@ public class ToDoManager
         boolean exit = false;
 
         while(!exit) {
-            System.out.println("1. Titolo: ");
-            System.out.println("2. Data consegna: ");
-            System.out.println("3. Descrizione: ");
-            System.out.println("4. priorita: ");
-            System.out.println("5. stato: ");
-            System.out.println("6. esci: ");
-            System.out.print("Fai la tua scelta: ");
+            System.out.println("1. Titolo ");
+            System.out.println("2. Data consegna ");
+            System.out.println("3. Descrizione ");
+            System.out.println("4. priorita ");
+            System.out.println("5. stato ");
+            System.out.println("6. esci ");
+            System.out.println("Fai la tua scelta ");
 
-            int modifica = in.nextInt();
+           String modifica = in.nextLine();
 
             switch (modifica) {
-                case 1:
+                case "1":
                     System.out.println("Inserisci nuovo titolo: ");
                     toDoAppoggio.setTitolo(in.nextLine());
                     break;
 
-                case 2:
+                case "2":
                     System.out.println("Inserisci nuovo Data Consegna: ");
                     toDoAppoggio.setDataConsegna(LocalDate.parse(in.nextLine()));
                     break;
 
-                case 3:
+                case "3":
                     System.out.println("Inserisci nuova Descrizione: ");
                     toDoAppoggio.setDescrizione(in.nextLine());
                     break;
 
-                case 4:
+                case "4":
                     System.out.println("Inserisci nuova priorita: ");
                     toDoAppoggio.setPriorita(ToDo.Priorita.valueOf(in.nextLine()));
                     break;
-                case 5:
+                case "5":
                     System.out.println("Inserisci nuovo stato: ");
                     toDoAppoggio.setStato(ToDo.Stato.valueOf(in.nextLine()));
                     break;
 
-                case 6:
+                case "6":
                     exit=true;
                     break;
 
             }
         }
 
-        update(toDoAppoggio);
+        _repository.update(toDoAppoggio);
 
     }
 
@@ -104,6 +105,6 @@ public class ToDoManager
         System.out.print("Inserisci l'ID dell'oggetto da eliminare: ");
         long id = in.nextLong();
 
-        delete(_repository.toDoMap.get(id).getId());
+        _repository.delete(_repository.toDoMap.get(id).getId());
     }
 }
