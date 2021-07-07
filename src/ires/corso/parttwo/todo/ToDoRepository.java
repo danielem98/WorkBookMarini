@@ -30,7 +30,7 @@ public class ToDoRepository implements Serializable
     private static String _fileName;
     private static boolean _init = false;
 
-    private static long idSeed;
+    private long idSeed;
 
 
 
@@ -52,7 +52,7 @@ public class ToDoRepository implements Serializable
     }
 
     //Generatore di ID
-    public static long getNewId(){
+    public long getNewId(){
         return ++idSeed;
     }
 
@@ -78,10 +78,9 @@ public class ToDoRepository implements Serializable
 
     //aggiunta di un to-do
     public void add(ToDo t) {
-        // si deve entrare nell'oggetto t e leggere il suo ID
-        // per poi salvarlo nella mappa correttamente (con put(ID, t))
-
-        toDoMap.put(t.getId(),t);
+        Long newid = getNewId();
+        t.setId(newid);
+        toDoMap.put(newid,t);
     }
 
     //aggiornamento di un to-do
@@ -119,7 +118,7 @@ public class ToDoRepository implements Serializable
 
             // Method for serialization of object
             out.writeObject(_repository);
-            out.writeObject(idSeed);
+            out.writeObject(_repository.idSeed);
 
             System.out.println("Object has been serialized");
         }

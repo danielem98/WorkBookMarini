@@ -3,6 +3,7 @@ package ires.corso.partthree;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class LambdaExpressions {
@@ -34,5 +35,24 @@ public class LambdaExpressions {
 
         nomiStream.filter(i -> i.length()>5).map(i -> i.toUpperCase(Locale.ROOT)).forEach(i -> System.out.print(i+ " "));
 
+        ArrayList<Integer> listN = listaNumeri();
+
+        System.out.println(listaNumeri().stream().distinct().map(n -> n * n));
+
+    }
+
+    public static ArrayList<Integer> listaNumeri(){
+        System.out.println("\n\n\n\nInserisci un array (numeri separati da uno spazio: )");
+        Scanner in = new Scanner(System.in);
+        String nl = in.nextLine();
+        String[] strArr = nl.split(" ");
+        ArrayList<Integer> arrInt = new ArrayList<>();
+
+
+        for(int j = 0; j < strArr.length; j++) {
+            arrInt.add(Integer.parseInt(strArr[j]));
+        }
+
+        return arrInt;
     }
 }

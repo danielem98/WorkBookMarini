@@ -29,12 +29,10 @@ public class ToDo implements Serializable, Cloneable
     }
 
     protected ToDo (){
-        this.id = getNewId();
         this.dataInserimento = LocalDate.now();
     }
 
     protected ToDo(String titolo, LocalDate dataConsegna, String descrizione, Priorita priorita, Stato stato) {
-        this.id = getNewId();
         this.titolo = titolo;
         this.dataInserimento = dataInserimento.now();
         this.dataConsegna = dataConsegna;
@@ -83,6 +81,10 @@ public class ToDo implements Serializable, Cloneable
 
     public Priorita getPriorita() {
         return priorita;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setTitolo(String titolo) {

@@ -26,11 +26,8 @@ public class ToDoApplication
 
     public static void main(String[] args) throws Exception {
 
-        ToDoRepository repository = null;
-        init("Repository.txt");
-        repository = getToDoRepository();
-
-        _repository=new ToDoRepository();
+        init("Repository.ser");
+        _repository = getToDoRepository();
 
         Scanner in = new Scanner(System.in);
 
@@ -111,7 +108,7 @@ public class ToDoApplication
                     System.out.println("Arrivederci");
                     esci = true;
 
-                    _repository.writeToFile("Repository.txt");
+                    _repository.writeToFile("Repository.ser");
                     break;
 
             }
