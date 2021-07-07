@@ -35,8 +35,15 @@ public class ToDoRepository implements Serializable
 
 
     //costruttore privato
-    public ToDoRepository(){
+    private ToDoRepository(){
     }
+
+
+    //Generatore di ID
+    public long getNewId(){
+        return ++idSeed;
+    }
+
 
     public static boolean init(String fileName){
         try{
@@ -51,10 +58,6 @@ public class ToDoRepository implements Serializable
         return _init;
     }
 
-    //Generatore di ID
-    public long getNewId(){
-        return ++idSeed;
-    }
 
     public static ToDoRepository getToDoRepository() throws Exception {
         // Restituisce sempre la stessa istanza (quella serializzata/deserializzata da file)
@@ -71,6 +74,7 @@ public class ToDoRepository implements Serializable
         return _repository;
     }
 
+
     //Eliminazione di un to-do
     public void delete(Long ID) {
         toDoMap.remove(ID);
@@ -82,6 +86,7 @@ public class ToDoRepository implements Serializable
         t.setId(newid);
         toDoMap.put(newid,t);
     }
+
 
     //aggiornamento di un to-do
     public void update(ToDo t) {
@@ -95,6 +100,7 @@ public class ToDoRepository implements Serializable
             System.out.println("id non presente");
     }
 
+
     public static List<ToDo> getToDoList() {
         // restituisce lista di tutti i TO-DO esistenti
         ArrayList<ToDo> toDoList = new ArrayList<>();
@@ -103,6 +109,7 @@ public class ToDoRepository implements Serializable
         }
         return toDoList;
     }
+
 
     public static void writeToFile(String fileName) {
         // Salva tutta l'istanza del repository (compresi gli oggetti
@@ -127,6 +134,7 @@ public class ToDoRepository implements Serializable
         }
     }
 
+    
     public static void loadFromFile() {
         // Individua il file e lo deserializza con readObject
         // _repository = ...
